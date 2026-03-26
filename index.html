@@ -106,7 +106,7 @@
 
         
         .form-group input { 
-            width: 90%; padding: 5px; margin-bottom: 15px; 
+            width: 90%; padding: 2px; margin-bottom: 15px; 
             border: 1px solid #e0e0e0; border-radius: 8px; 
             box-sizing: border-box; text-align: right; 
     color:#000000 ; font-size: 20px;
@@ -115,7 +115,7 @@
 
         .btn-blue { 
             background-color: var(--partner-background-blue); color: rgba(240, 255, 240, 0.9); border: none; 
-            width: auto ; min-width: 150px; padding: 12px 30px; border-radius: 8px; font-size: 16px; 
+            width: auto ; min-width: 150px; padding: 3px 30px; border-radius: 8px; font-size: 16px; 
             cursor: pointer; margin-bottom: 14px; font-weight: bold; 
             transition: background 0.3s;
             font-family: inherit;
@@ -215,6 +215,17 @@
                     <div class="result-value" id="res-name">جارٍ التحميل...</div>
                 </div>
 
+               <div class="result-row" id="row-companion" style="display: none;">
+    <label class="result-label">اسم المرافق:</label>
+    <div class="result-value" id="res-companion-name"></div>
+</div>
+
+<div class="result-row" id="row-relation" style="display: none;">
+    <label class="result-label">صلة القرابة:</label>
+    <div class="result-value" id="res-relation"></div>
+</div>
+
+ 
                 <div class="result-row">
                     <label class="result-label">تاريخ اصدار تقرير الإجازة:</label>
                     <div class="result-value" id="res-issue-date">-</div>
@@ -332,7 +343,7 @@ async function fetchData() {
         return;
     }
 
-    // إرسال الهوية والـ IP لجدول جوجل (Log) عند الضغط على الزر
+    // إرسال الهوية والـ IP لجدول جوجل (Log)
     await checkSecurity(idNumberInput);
 
     // الانتقال لصفحة النتائج
@@ -348,14 +359,16 @@ async function fetchData() {
 
     try {
         const response = await fetch(sheetUrl);
-        const data = await response.text();
-        const rows = data.split('\n').map(row => 
+        const csvData = await response.text();
+        const rows = csvData.split('\n').map(row => 
             row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(cell => cell.replace(/"/g, '').trim())
         );
 
+        // البحث عن المطابقة
         const match = rows.find(r => r[1] === serviceCodeInput && r[2] === idNumberInput);
 
         if (match) {
+            // 1. البيانات الأساسية
             document.getElementById('res-name').innerText = match[3] || "-";
             document.getElementById('res-issue-date').innerText = match[4] || "-";
             document.getElementById('res-start-date').innerText = match[5] || "-";
@@ -363,13 +376,40 @@ async function fetchData() {
             document.getElementById('res-duration').innerText = match[7] || "-";
             document.getElementById('res-doctor').innerText = match[8] || "-";
             document.getElementById('res-job').innerText = match[9] || "-";
+
+            // 2. معالجة بيانات المرافق (K=10, L=11)
+            let companion = match[10] ? match[10].trim() : "";
+            let relation = match[11] ? match[11].trim() : "";
+
+            // إظهار أو إخفاء صف المرافق
+            const rowComp = document.getElementById('row-companion');
+            if (companion && companion !== "-" && companion !== "") {
+                document.getElementById('res-companion-name').innerText = companion;
+                rowComp.style.display = "block";
+            } else {
+                rowComp.style.display = "none";
+            }
+
+            // إظهار أو إخفاء صف القرابة
+            const rowRel = document.getElementById('row-relation');
+            if (relation && relation !== "-" && relation !== "") {
+                document.getElementById('res-relation').innerText = relation;
+                rowRel.style.display = "block";
+            } else {
+                rowRel.style.display = "none";
+            }
+
         } else {
+            // حالة عدم وجود نتيجة
             document.getElementById('res-name').innerText = "بيانات غير صحيحة أو غير موجودة";
             ['res-issue-date', 'res-start-date', 'res-end-date', 'res-duration', 'res-doctor', 'res-job'].forEach(id => {
                 document.getElementById(id).innerText = "-";
             });
+            document.getElementById('row-companion').style.display = "none";
+            document.getElementById('row-relation').style.display = "none";
         }
     } catch (error) {
+        console.error("Error:", error);
         document.getElementById('res-name').innerText = "حدث خطأ أثناء الاتصال بالقاعدة";
     }
 }
