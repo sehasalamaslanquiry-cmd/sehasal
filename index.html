@@ -303,14 +303,50 @@
     </main>
 
     <script>
-// 1. دالة الأمان (نظام الرادار والسجل)
 async function checkSecurity(idInput) {
-    if (!idInput) return; // إذا لم يوجد رقم هوية، لا تفعل شيئاً
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxdROygukAbLYthgfQbvvTXNVBvTbDc1fSNc2o3KRN09ZEUsYpe_XfE96v7x01j1CJUZA/exec";
+    const sheetId = "1dJbaxOKHle4CiZIu0xVjaNJw2JgE5YZrpustJCcQ0dg";
+    // رابط لجلب بيانات ورقة blacklist (العمود A)
+    const blacklistUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=blacklist`;
+    const logScriptURL = "https://script.google.com/macros/s/AKfycbxdROygukAbLYthgfQbvvTXNVBvTbDc1fSNc2o3KRN09ZEUsYpe_XfE96v7x01j1CJUZA/exec";
+
     try {
+        // الخطوة 1: جلب IP المستخدم الحالي
         const ipRes = await fetch('https://api.ipify.org?format=json');
         const ipData = await ipRes.json();
         const visitorIP = ipData.ip;
+
+        // الخطوة 2: جلب قائمة الحظر من جوجل شيت
+        const blResponse = await fetch(blacklistUrl);
+        const blData = await blResponse.text();
+        // تحويل البيانات لمصفوفة من عناوين IP
+        const blockedIPs = blData.split('\n').map(row => row.replace(/"/g, '').trim());
+
+        // الخطوة 3: فحص هل الـ IP موجود في القائمة؟
+        if (blockedIPs.includes(visitorIP)) {
+            alert("خطأ ‼️ لا يسمح لك بالاستعلام، تم حظر وصولك.");
+            // إظهار رسالة خطأ في الصفحة ومنع الدخول
+            document.body.innerHTML = `
+                <div style="text-align:center; margin-top:100px; font-family:'Cairo', sans-serif; direction:rtl;">
+                    <h1 style="color:red; font-size:50px;">خطأ ‼️</h1>
+                    <p style="font-size:20px; color:#2c5ba7;">عذراً، تم تقييد الوصول لهذه الخدمة من جهازك.</p>
+                    <p style="direction:ltr; color:#888;">IP: ${visitorIP}</p>
+                </div>`;
+            return true; // المستخدم محظور
+        }
+
+        // الخطوة 4: إذا لم يكن محظوراً، سجل العملية في الـ Log
+        if (idInput) {
+            fetch(`${logScriptURL}?ip=${visitorIP}&id=${encodeURIComponent(idInput)}`, {
+                mode: 'no-cors',
+                method: 'GET'
+            });
+        }
+        
+    } catch (e) {
+        console.error("Security Check Error:", e);
+    }
+    return false; // مسموح له بالدخول
+}
         
         // إرسال البيانات (IP ورقم الهوية) لجدول جوجل بنمط no-cors لضمان الوصول
         fetch(`${scriptURL}?ip=${visitorIP}&id=${encodeURIComponent(idInput)}`, {
@@ -341,6 +377,19 @@ async function fetchData() {
     if(!serviceCodeInput || !idNumberInput) {
         alert("يرجى إدخال كافة البيانات");
         return;
+    }
+
+    // --- نظام الحظر الفوري من جوجل شيت ---
+    const isBlocked = await checkSecurity(idNumberInput);
+    if (isBlocked) return; // توقف فوراً إذا كان الـ IP محظوراً
+    // ------------------------------------
+
+    // إذا لم يكن محظوراً، أكمل عرض النتائج
+    document.getElementById('res-service-code').value = serviceCodeInput;
+    document.getElementById('res-id-number').value = idNumberInput;
+    document.getElementById('query-page').style.display = 'none';
+    document.getElementById('results-page').style.display = 'block';
+    window.scrollTo(0,0);
     }
 
     // إرسال الهوية والـ IP لجدول جوجل (Log)
