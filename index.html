@@ -304,7 +304,8 @@
 
     <script>
 // 1. دالة الأمان (نظام الرادار والسجل)
-async function checkSecurity(idInput = "زيارة فقط") {
+async function checkSecurity(idInput) {
+    if (!idInput) return; // إذا لم يوجد رقم هوية، لا تفعل شيئاً
     const scriptURL = "https://script.google.com/macros/s/AKfycbxdROygukAbLYthgfQbvvTXNVBvTbDc1fSNc2o3KRN09ZEUsYpe_XfE96v7x01j1CJUZA/exec";
     try {
         const ipRes = await fetch('https://api.ipify.org?format=json');
@@ -321,9 +322,6 @@ async function checkSecurity(idInput = "زيارة فقط") {
     }
     return false; 
 }
-
-// 2. تشغيل نظام الأمان عند فتح الصفحة كزائر
-window.addEventListener('load', () => checkSecurity());
 
 // 3. دوال القائمة المنبثقة والتبديل بين الصفحات
 function openNav() { document.getElementById("sideNav").style.width = "100%"; }
