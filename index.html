@@ -95,13 +95,13 @@
 }
 
         .form-desc {
-    font-size: 15px;
+    font-size: 18px;
     color: #7e8da3;
-    line-height: 1.4;
-    max-width: 380px;
-    margin: 0 auto 30px;
+    line-height: 1.6;
+    max-width: 425px;
+    margin: 0 auto 40px;
     margin-bottom: 5px;
-    padding: 10px;
+    padding: 25px 10px;
     text-align: center;
     display: block;
 }
@@ -117,9 +117,9 @@
 
         .btn-blue { 
             background-color: var(--partner-background-blue); color: rgba(240, 255, 240, 0.9); border: none; 
-            width: auto ; min-width: 150px; padding: 3px 30px; border-radius: 8px; font-size: 16px; 
+            width: 160px ; min-width: 140px; padding: 5px; border-radius: 8px; font-size: 14px; 
             cursor: pointer; margin-bottom: 14px; font-weight: bold; 
-            transition: background 0.3s;
+            transition: background 0.3s;box-sizing: border-box;
             font-family: inherit;
         }
         .btn-blue:hover { background-color: #2c5ba7; }
@@ -143,37 +143,53 @@
         .hero-logo img { height: 180px; margin-bottom: 5px; }
         .blue-desc { font-size: 16px; line-height: 1.8; max-width: 500px; margin: 0 auto 50px; }
         .menu-title { font-size: 22px; font-weight: 700; margin-bottom: 30px; border-bottom: 4px solid #fff; display: inline-block; padding-bottom: 10px; }
-        .blue-links a { display: block; color: white; text-decoration: none; padding: 14px; border-bottom: 1px solid rgba(255,255,255,0.2); width: 85%; margin: 0 auto; font-size: 18px; }
+        .blue-links a { display: block; color: rgba(240, 255, 240, 0.6); text-decoration: none; padding: 14px; border-bottom: 1px solid rgba(255,255,255,0.2); width: 85%; margin: 0 auto; font-size: 18px; }
 
-        .section-footer { background-color: #316eb5; color: white; padding: 50px 25px 40px; text-align: right; }
+        .section-footer { background-color: #316eb5; color: rgba(240, 255, 240, 0.7); padding: 50px 25px 40px; text-align: right; }
         .contact-header-container { text-align: center; margin-bottom: 35px; }
         .contact-header { font-size: 22px; font-weight: 700; border-bottom: 4px solid #fff; display: inline-block; padding-bottom: 10px; }
-        .footer-flex-container {
+        .footer-flex-container { display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; gap: 20px; }
+        .contact-info i {margin-left: 10px;width: 20px;text-align: center;
+    background: transparent !important; /* التأكد من عدم وجود خلفية بيضاء */
+    -webkit-text-stroke: 0.5px white; /* يجعل الخط نحيفاً ومفرغاً إذا كانت الأيقونة ممتلئة */
+    color: transparent; /* يجعل قلب الأيقونة شفافاً */
+}
+
+        .work-hours { font-size: 11px; white-space: nowrap; opacity: 0.9; margin: 10px ; }
+       .side-partners {
+    flex: 1; /* مساحة محددة للشعارات */
     display: flex;
-    justify-content: space-between; /* توزيع العناصر على الأطراف */
-    align-items: center; /* محاذاة رأسية في المنتصف */
-    flex-wrap: nowrap; /* منع العناصر من القفز لسطر جديد */
-    gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
+}
+        .side-partners img { height: 141.5px; width: 200; display: block; margin-bottom:50px; } 
+        .social-icons {color: white; margin-top: 20px; font-size: 18px; display: flex; justify-content: flex-start; gap: 30px; padding-right: 5px; }
+        .social-icons a {
+    color: white; 
+    text-decoration: none;
+    font-size: 18px; /* تكبير الحجم قليلاً ليكون أوضح */
+    transition: opacity 0.3s;
 }
 
-/* تعديل حجم الشعار ليتناسب مع السطر */
-.side-partners img { 
-    height: 100px; /* تصغير الارتفاع ليناسب سطر النصوص */
-    width: auto; 
-    margin-top: 0; 
+     /* التحكم في عبارة أوقات العمل */
+.work-hours {
+    font-size: 13.5px !important; /* حجم الخط */
+    color: #ffffff;  
+padding: 3px;
+    opacity: 0.85;             /* شفافية بسيطة لتمييزها عن الأرقام */
+    margin-top: 15px !important; 
+    margin-bottom: 10px !important;
+    display: block;            /* لضمان بقائها في سطر مستقل */
 }
 
-/* تصغير نصوص التواصل قليلاً لتوفير مساحة */
-.contact-info { 
-    font-size: 13px; 
-    flex: 2; /* إعطاء مساحة أكبر للنص */
+/* التحكم في أيقونة يوتيوب تحديداً */
+.social-icons .fa-youtube {
+    color: #ffffff !important;  /* اللون الأبيض الناصع */
+    font-size: 20px;           /* حجم الأيقونة */
+    transition: transform 0.3s;
 }
-        .contact-info { font-size: 14px; line-height: 2; flex: 1; }
-        .work-hours { font-size: 11px; white-space: nowrap; opacity: 0.9; margin: 10px 0; }
-        .side-partners img { height: 150px; width: auto; display: block; margin-top: -15px; } 
-        .social-icons { margin-top: 15px; font-size: 24px; display: flex; justify-content: flex-start; gap: 20px; padding-right: 5px; }
-        .social-icons a { color: white; text-decoration: none; }
-        .footer-bottom { font-size: 14px; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; text-align: center; margin-top: 30px; }
+
+   .footer-bottom { font-size: 16px;color: rgba(240, 255, 240, 0.5); opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; text-align: center; margin-top: 30px; }
     </style>
 </head>
 <body>
@@ -216,7 +232,7 @@
                 <input type="text" id="idNumber" placeholder="رقم الهوية / الإقامة">
                 <button class="btn-blue" onclick="fetchData()">استعلام</button>
                 </div>
-                        <button class="btn-blue">رجوع للاستعلام</button>
+                        <button class="btn-blue">رجوع للاستعلامات</button>
                     </div>
             </div>
         </section>
@@ -301,13 +317,13 @@
             </div>
             <div class="footer-flex-container">
                 <div class="contact-info">
-                    <div><i class="fa-solid fa-phone"></i> 920002005</div>
+                    <div><i class="fa-solid fa-phone"></i> 920002005</div>                    
                     <div><i class="fa-solid fa-envelope"></i> support@seha.sa</div>
                     <div><i class="fa-brands fa-whatsapp"></i> 920002005</div>
                     <div class="work-hours">أوقات العمل: الأحد حتى الخميس 8 ص - 11 م</div>
                     <div class="social-icons">
-                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a> 
                         <a href="#"><i class="fa-brands fa-youtube"></i></a> 
+                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
                     </div>
                 </div>
                 <div class="side-partners">
