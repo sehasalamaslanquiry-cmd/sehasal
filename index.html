@@ -95,13 +95,13 @@
 }
 
         .form-desc {
-    font-size: 18px;
+    font-size: 15px;
     color: #7e8da3;
-    line-height: 1.6;
-    max-width: 425px;
-    margin: 0 auto 40px;
+    line-height: 1.4;
+    max-width: 380px;
+    margin: 0 auto 30px;
     margin-bottom: 5px;
-    padding: 25px 10px;
+    padding: 10px;
     text-align: center;
     display: block;
 }
@@ -148,7 +148,26 @@
         .section-footer { background-color: #316eb5; color: white; padding: 50px 25px 40px; text-align: right; }
         .contact-header-container { text-align: center; margin-bottom: 35px; }
         .contact-header { font-size: 22px; font-weight: 700; border-bottom: 4px solid #fff; display: inline-block; padding-bottom: 10px; }
-        .footer-flex-container { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; }
+        .footer-flex-container {
+    display: flex;
+    justify-content: space-between; /* توزيع العناصر على الأطراف */
+    align-items: center; /* محاذاة رأسية في المنتصف */
+    flex-wrap: nowrap; /* منع العناصر من القفز لسطر جديد */
+    gap: 10px;
+}
+
+/* تعديل حجم الشعار ليتناسب مع السطر */
+.side-partners img { 
+    height: 100px; /* تصغير الارتفاع ليناسب سطر النصوص */
+    width: auto; 
+    margin-top: 0; 
+}
+
+/* تصغير نصوص التواصل قليلاً لتوفير مساحة */
+.contact-info { 
+    font-size: 13px; 
+    flex: 2; /* إعطاء مساحة أكبر للنص */
+}
         .contact-info { font-size: 14px; line-height: 2; flex: 1; }
         .work-hours { font-size: 11px; white-space: nowrap; opacity: 0.9; margin: 10px 0; }
         .side-partners img { height: 150px; width: auto; display: block; margin-top: -15px; } 
