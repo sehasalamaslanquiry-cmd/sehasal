@@ -31,10 +31,10 @@
             background-color: #fff; display: flex; align-items: center; justify-content: space-between;
             padding: 0 2px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); z-index: 1000; box-sizing: border-box;
         }
-        .logo img { height: 135px; width: auto;  padding: 0px -5px;}
+        .logo img { height: 110px; width: auto;  padding: 0px -5px;}
 
-        .menu-icon { cursor: pointer; padding: 7px; display: flex; flex-direction: column; justify-content: space-between; height: 20px; width: 23px; }
-        .menu-icon span { display: block; width: 100%; height: 2.5px; background-color: #3498db; border-radius: 2px; }
+        .menu-icon { cursor: pointer; padding: 6px; display: flex; flex-direction: column; justify-content: space-between; height: 18px; width: 21px; }
+        .menu-icon span { display: block; width: 90%; height: 2.2px; background-color: #3498db; border-radius: 2px; }
 
         .sidenav {
             height: 100%; width: 0; position: fixed; z-index: 2000;
@@ -44,7 +44,19 @@
         }
         .sidenav .big-side-logo { height: 160px; width: auto; margin-bottom: 30px; }
         .sidenav a { padding: 8px; text-decoration: none; font-size: 18px; color: #2c5ba7; display: block; border-bottom: 1px solid #f5f5f5; font-weight: 600; }
-        .close-btn { position: absolute; top: 15px; right: 25px; font-size: 45px; color: #3498db; cursor: pointer; line-height: 1; }
+        .close-btn {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 10px; /* تحكم في حجم الرمز من هنا */
+    color: #ffffff;  /* لون الرمز */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: 0.3s;
+}
 
         .login-btn-container { width: 100%; padding: 30px 20px; box-sizing: border-box; margin-top: auto; }
         .login-btn { 
@@ -68,11 +80,11 @@
         #results-page { display: none; }
         .section-form { padding: 0px 0px 220px; text-align: center; max-width: 600px; margin: 0 auto; }
         .form-title { 
-            font-size: 50px; 
+            font-size: 35px; 
             font-weight: 800; 
             letter-spacing: 1px;
             color: #2c5ba7; 
-            margin-bottom: 5px;
+            margin-bottom: 17px;
             display: inline-block;
             /* الشطر السحري: جعل الخلفية بارتفاع 85% فقط من النص وتبدأ من الأعلى */
             background-image: linear-gradient(to left, 
@@ -95,31 +107,40 @@
 }
 
         .form-desc {
-    font-size: 18px;
+    font-size: 14px; /* تصغير بسيط ليأخذ النص راحته في السطرين */
     color: #7e8da3;
-    line-height: 1.6;
-    max-width: 425px;
-    margin: 0 auto 40px;
-    margin-bottom: 5px;
-    padding: 25px 10px;
+    line-height: 1.5; /* مسافة مريحة بين السطرين */
+    
+    /* تحديد العرض */
+    width: 95%; 
+    font-size: 15px;
+max-width: 450px; /* لن يتجاوز هذا العرض ولن يقل عن 90% من الشاشة */
+    margin: 0 auto 14px;
     text-align: center;
-    display: block;
+
+    /* القفل السحري لمنع السطر الثالث */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* إجبار المتصفح على عرض سطرين فقط */
+    -webkit-box-orient: vertical;  
+    overflow: hidden; /* إخفاء أي كلمة تحاول النزول للسطر الثالث */
+    text-overflow: ellipsis; /* إضافة ثلاث نقاط (...) إذا تم قص نص زائد */
 }
+
 
         
         .form-group input { 
-            width: 90%; padding: 2px; margin-bottom: 15px; 
+            width: 90%; padding: 1px; margin-bottom: 16px; 
             border: 1px solid #e0e0e0; border-radius: 8px; 
             box-sizing: border-box; text-align: right; 
-    color:#000000 ; font-size: 20px;
+    color:#000000 ; font-size: 18px;
             font-family: inherit;
         }
 
         .btn-blue { 
             background-color: var(--partner-background-blue); color: rgba(240, 255, 240, 0.9); border: none; 
-            width: 160px ; min-width: 140px; padding: 5px; border-radius: 8px; font-size: 14px; 
+            width: 7 ;height: 30px; min-width: 150px; padding: 1px 2px; border-radius: 8px; font-size: 14px; 
             cursor: pointer; margin-bottom: 14px; font-weight: bold; 
-            transition: background 0.3s;box-sizing: border-box;
+            transition: background 0.3s;
             font-family: inherit;
         }
         .btn-blue:hover { background-color: #2c5ba7; }
@@ -141,55 +162,151 @@
 
         .section-blue-info { background-color: var(--partner-background-blue); color: white; padding: 0px 20px; text-align: center; }
         .hero-logo img { height: 180px; margin-bottom: 5px; }
-        .blue-desc { font-size: 16px; line-height: 1.8; max-width: 500px; margin: 0 auto 50px; }
-        .menu-title { font-size: 22px; font-weight: 700; margin-bottom: 30px; border-bottom: 4px solid #fff; display: inline-block; padding-bottom: 10px; }
-        .blue-links a { display: block; color: rgba(240, 255, 240, 0.6); text-decoration: none; padding: 14px; border-bottom: 1px solid rgba(255,255,255,0.2); width: 85%; margin: 0 auto; font-size: 18px; }
-
-        .section-footer { background-color: #316eb5; color: rgba(240, 255, 240, 0.7); padding: 50px 25px 40px; text-align: right; }
-        .contact-header-container { text-align: center; margin-bottom: 35px; }
-        .contact-header { font-size: 22px; font-weight: 700; border-bottom: 4px solid #fff; display: inline-block; padding-bottom: 10px; }
-        .footer-flex-container { display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; gap: 20px; }
-        .contact-info i {margin-left: 10px;width: 20px;text-align: center;
-    background: transparent !important; /* التأكد من عدم وجود خلفية بيضاء */
-    -webkit-text-stroke: 0.5px white; /* يجعل الخط نحيفاً ومفرغاً إذا كانت الأيقونة ممتلئة */
-    color: transparent; /* يجعل قلب الأيقونة شفافاً */
+        .blue-desc { font-size: 18px; line-height: 1.8; max-width: 500px;color: rgba(240, 255, 240, 0.9); margin: 0 auto 60px; }
+        .menu-title { 
+    font-size: 20px; 
+    font-weight: 700; 
+    margin-bottom: 30px; 
+    position: relative;    /* ضروري لتموضع الخط القصير */
+    display: inline-block; 
+    padding-bottom: 5px;  /* مسافة بين النص والخط */
 }
 
-        .work-hours { font-size: 11px; white-space: nowrap; opacity: 0.9; margin: 10px ; }
-       .side-partners {
-    flex: 1; /* مساحة محددة للشعارات */
+/* هذا الجزء هو المسؤول عن رسم الخط القصير */
+.menu-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 25%;             /* يبدأ من جهة اليمين */
+    
+    width: 50%;           /* هنا تتحكم في طول الخط (اجعله 40% ليكون أقصر من الكلمة) */
+    
+    height: 3px;          /* سمك الخط */
+    background-color: rgba(240, 255, 240, 0.5); /* لون الخط (أبيض كما في كودك) */
+    border-radius: 2px;
+}
+        .blue-links a { display: block; color:white;  color: rgba(240, 255, 240, 0.9); text-decoration: none; padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.2); width: 85%; margin: 0 auto; font-size: 14px; }
+
+        .section-footer {
+    background-color: #316eb5;
+    color: white;
+    padding: 40px 20px;
+    text-align: right;
+    direction: rtl;
+}
+        .contact-header-container { text-align: center; margin-bottom: 35px;}
+        .contact-header {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+    position: relative;    /* ضروري لتموضع الخط القصير */
+    display: inline-block; /* لجعل الخط تحت الكلمة فقط وليس بعرض الصفحة */
+    padding-bottom: 12px;  /* المسافة بين النص والخط */
+}
+
+/* رسم الخط القصير تحت "تواصل معنا" بنفس ستايل القائمة الرئيسية */
+.contact-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 30%;           /* لتوسيط الخط تحت الكلمة */
+    
+    width: 50%;           /* طول الخط (أقصر من الكلمة) */
+    
+    height: 3px;          /* سمك الخط */
+    background-color: rgba(240, 255, 240, 0.5); /* لون الخط أبيض متناسق مع الفوتر */
+    border-radius: 2px;
+}
+
+        .footer-flex-container {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: nowrap; /* يمنع التداخل */
+    gap: 15px;
+    margin-top: 20px;
 }
-        .side-partners img { height: 141.5px; width: 200; display: block; margin-bottom:50px; } 
-        .social-icons {color: white; margin-top: 20px; font-size: 18px; display: flex; justify-content: flex-start; gap: 30px; padding-right: 5px; }
-        .social-icons a {
-    color: white; 
+
+.contact-info {
+    flex: 1;
+    font-size: 11px;
+    line-height: 2;
+    padding: 0px 1px;
+    color: rgba(240, 255, 240, 0.9); 
+}
+
+.contact-info div {
+    margin-bottom: 3px;
+    white-space: nowrap; /* يمنع انكسار الأرقام */
+}
+
+.side-partners {
+    flex: 0 0 auto;
+}
+
+.side-partners img {
+    height: 60px; /* حجم متناسق مع الأسطر */
+    width: auto;
+    max-width: 140px;
+    display: block;
+}
+
+        .contact-info i {
+    width: 14px;
+    color: transparent; -webkit-text-stroke: 1px white; margin-left: 10px;
+    text-align: center;
+    margin-left: 2px;
+}
+        .side-partners img { height: 100px; display: block; margin-top: -15px 10px; } 
+        .social-icons { margin-top: 15px; font-size: 24px; display: flex; justify-content: flex-start; gap: 20px; padding-right: 5px; }
+        .social-icons a { color: white; text-decoration: none; }
+        .footer-bottom { font-size: 14px; opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(240, 255, 240, 0.9); 
+padding-top: 40px; text-align: center; margin-top: 30px; }
+/* التحكم في سطر أوقات الدوام */
+.work-hours-text {
+    font-size: 10px;             /* حجم الخط */
+    color: rgba(255, 255, 255, 1); /* لون أبيض شفاف قليلاً */
+    margin-top: 20px;            /* المسافة العلوية عن أرقام التواصل */
+    line-height: 1.7;            /* ارتفاع السطر */
+    font-weight: 600;            /* سماكة الخط */
+    display: block;              /* لضمان أنه في سطر منفصل */
+}
+
+/* التحكم في حاوية أيقونات التواصل (X و يوتيوب) */
+/* التحكم في حاوية أيقونات التواصل */
+.social-media-wrapper {
+    margin-top: 30px;            
+    display: flex;
+    gap: 30px;                   /* المسافة بين الأيقونات */
+    justify-content: flex-start; 
+}
+
+/* إعادة ضبط الأيقونات لتكون بيضاء ممتلئة تماماً */
+.social-icon-item {
     text-decoration: none;
-    font-size: 18px; /* تكبير الحجم قليلاً ليكون أوضح */
-    transition: opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
 }
 
-     /* التحكم في عبارة أوقات العمل */
-.work-hours {
-    font-size: 13.5px !important; /* حجم الخط */
-    color: #ffffff;  
-padding: 3px;
-    opacity: 0.85;             /* شفافية بسيطة لتمييزها عن الأرقام */
-    margin-top: 15px !important; 
-    margin-bottom: 10px !important;
-    display: block;            /* لضمان بقائها في سطر مستقل */
+.social-icon-item i {
+    color: #ffffff !important;   /* لون أبيض ممتلئ */
+    font-size: 20px;             /* حجم الأيقونة */
+    
+    /* إلغاء أي حدود سابقة قد تسبب التجويد */
+    -webkit-text-stroke: 0px transparent !important; 
+    
+    /* ضمان عدم وجود شفافية في قلب الأيقونة */
+    opacity: 1 !important;
 }
 
-/* التحكم في أيقونة يوتيوب تحديداً */
-.social-icons .fa-youtube {
-    color: #ffffff !important;  /* اللون الأبيض الناصع */
-    font-size: 20px;           /* حجم الأيقونة */
-    transition: transform 0.3s;
+/* تأثير بسيط عند تمرير الماوس */
+.social-icon-item:hover {
+    opacity: 0.8;
+    transform: scale(1.1);
 }
 
-   .footer-bottom { font-size: 16px;color: rgba(240, 255, 240, 0.5); opacity: 0.8; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; text-align: center; margin-top: 30px; }
+
+
     </style>
 </head>
 <body>
@@ -317,17 +434,25 @@ padding: 3px;
             </div>
             <div class="footer-flex-container">
                 <div class="contact-info">
-                    <div><i class="fa-solid fa-phone"></i> 920002005</div>                    
+                    <div><i class="fa-solid fa-phone"></i> 920002005</div>
                     <div><i class="fa-solid fa-envelope"></i> support@seha.sa</div>
                     <div><i class="fa-brands fa-whatsapp"></i> 920002005</div>
-                    <div class="work-hours">أوقات العمل: الأحد حتى الخميس 8 ص - 11 م</div>
-                    <div class="social-icons">
-                        <a href="#"><i class="fa-brands fa-youtube"></i></a> 
-                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-                    </div>
-                </div>
+                    <span class="work-hours-text">
+        أوقات العمل: الأحد حتى الخميس 8 ص - 11 م
+    </span>
+    
+    <div class="social-media-wrapper">
+        
+        <a href="#" class="social-icon-item">
+            <i class="fa-brands fa-youtube"></i>
+        </a> 
+       <a href="#" class="social-icon-item">
+            <i class="fa-brands fa-x-twitter"></i>
+        </a>  
+    </div>
+</div>
                 <div class="side-partners">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/1LiMXZf6w_dnA9V6ar1BbZcpPluDCDyHx" alt="شعار لين ووزارة الصحة">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1-DUApMHlYX27oHfAt_P5RLhV6FJllMZ9" alt="شعار لين ووزارة الصحة">
                 </div>
             </div>
             <div class="footer-bottom">
