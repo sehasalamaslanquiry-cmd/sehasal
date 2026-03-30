@@ -159,10 +159,23 @@ max-width: 450px; /* لن يتجاوز هذا العرض ولن يقل عن 90% 
         .result-row { margin-bottom: 20px; }
         .result-label { font-weight: 800; color: #000000; display: block; margin-bottom: 5px; font-size: 16px; }
         .result-value { color: #757575; font-weight: 700;font-size: 17px;  display: block; padding-top: 10px;padding-bottom: 10px; margin-bottom: 10px; }
-
         .section-blue-info { background-color: var(--partner-background-blue); color: white; padding: 0px 20px; text-align: center; }
         .hero-logo img { height: 180px; margin-bottom: 5px; }
-        .blue-desc { font-size: 18px; line-height: 1.8; max-width: 500px;color: rgba(240, 255, 240, 0.9); margin: 0 auto 60px; }
+       /* حاوية النتائج ذات الخلفية الرمادية */
+.results-card-box {
+    background-color: #f5f5f5;    /* لون رمادي فاتح واحترافي */
+    padding: 20px 20px;           /* مسافات داخلية */
+    border-radius: 12px;          /* زوايا منحنية */
+    margin: 15px 15px;            /* مسافة خارجية وتوسيط */
+    max-width: 90%;               /* لضمان التناسق على الموبايل */
+}
+
+/* لضمان عدم وجود مسافات زائدة داخل البطاقة */
+.results-card-box .result-row:last-child {
+    margin-bottom: 0;
+}
+
+ .blue-desc { font-size: 18px; line-height: 1.8; max-width: 500px;color: rgba(240, 255, 240, 0.9); margin: 0 auto 60px; }
         .menu-title { 
     font-size: 20px; 
     font-weight: 700; 
@@ -363,7 +376,7 @@ padding-top: 40px; text-align: center; margin-top: 30px; }
                     <input type="text" id="res-service-code" placeholder="رمز الخدمة" disabled>
                     <input type="text" id="res-id-number" placeholder="رقم الهوية / الإقامة" disabled>
                 </div>
-
+              <div class="results-card-box">
                 <div class="result-row">
                     <label class="result-label">الاسم:</label>
                     <div class="result-value" id="res-name">جارٍ التحميل...</div>
