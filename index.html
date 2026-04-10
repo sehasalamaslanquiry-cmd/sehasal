@@ -2,8 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>منصة صحة - الإجازات المرضية</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -407,62 +406,36 @@ padding-top: 40px; text-align: center; margin-top: 30px; }
                 </div>
 
                 <div class="result-row">
-<main class="main-content">
-    <section id="query-page" class="section-form">
-        <h1 class="form-title">الإجازات المرضية</h1>
-        <p class="form-desc">خدمة الاستعلام عن الإجازات المرضية تتيح لك الاستعلام عن حالة طلبك للإجازة ويمكنك طباعتها عن طريق تطبيق صحتي</p>
-        <div class="form-group">
-            <input type="text" id="serviceCode" placeholder="رمز الخدمة">
-            <input type="text" id="idNumber" placeholder="رقم الهوية / الإقامة">
-            <button class="btn-blue" onclick="fetchData()">استعلام</button>
-            <button class="btn-blue" style="background-color: transparent; border: 1px solid #316eb5; color: #316eb5; width: 90%;">رجوع للاستعلامات</button>
-        </div>
-    </section>
+                    <label class="result-label">المدة بالايام:</label>
+                    <div class="result-value" id="res-duration">-</div>
+                </div>
 
-    <section id="results-page" class="section-form">
-        <h1 class="form-title">الإجازات المرضية</h1>
-        <p class="form-desc">خدمة الاستعلام عن الإجازات المرضية تتيح لك الاستعلام عن حالة طلبك للإجازة ويمكنك طباعتها عن طريق تطبيق صحتي</p>
-        
-        <div class="form-group">
-            <input type="text" id="res-service-code" placeholder="رمز الخدمة" disabled>
-            <input type="text" id="res-id-number" placeholder="رقم الهوية / الإقامة" disabled>
-        </div>
+                <div class="result-row">
+                    <label class="result-label">إسم الطبيب:</label>
+                    <div class="result-value" id="res-doctor">-</div>
+                </div>
 
-        <div class="results-card-box">
-            <div class="result-row">
-                <label class="result-label">الاسم:</label>
-                <div class="result-value" id="res-name">جارٍ التحميل...</div>
-            </div>
-            <div class="result-row" id="row-companion" style="display: none;">
-                <label class="result-label">اسم المرافق:</label>
-                <div class="result-value" id="res-companion-name"></div>
-            </div>
-            <div class="result-row" id="row-relation" style="display: none;">
-                <label class="result-label">صلة القرابة:</label>
-                <div class="result-value" id="res-relation"></div>
-            </div>
-            <div class="result-row">
-                <label class="result-label">المسمى الوظيفي:</label>
-                <div class="result-value" id="res-job">-</div>
-            </div>
-        </div> 
-        <button class="btn-blue" onclick="showQueryPage()" style="margin-top: 30px; width: 90%;">استعلام جديد</button>
-    </section>
+                <div class="result-row">
+                    <label class="result-label">المسمى الوظيفي:</label>
+                    <div class="result-value" id="res-job">-</div>
+                </div>
+</div>
+                <button class="btn-blue" onclick="showQueryPage()">استعلام جديد</button>
+        </section>
 
-    <section class="section-blue-info">
-        <div class="hero-logo">
-            <img src="https://lh3.googleusercontent.com/u/0/d/147KZ--zUA09JsHLlkRFOa9Dvcv5jfTy4" class="white-seha-logo" alt="صحة أبيض">
-        </div>
-        <p class="blue-desc">منصة صحة تخدم جميع المنشآت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشآت الطبية وتسعى إلى توحيد وأتمتة الإجراءات والخدمات.</p>
-        <h3 class="menu-title">القائمة الرئيسية</h3>
-        <div class="blue-links">
-            <a href="#">الخدمات</a>
-            <a href="#">الاستعلامات</a>
-            <a href="#">تواصل معنا</a>
-        </div>
-    </section>
-</main>
-
+        <section class="section-blue-info">
+            <div class="hero-logo">
+                <img src="https://lh3.googleusercontent.com/u/0/d/147KZ--zUA09JsHLlkRFOa9Dvcv5jfTy4" class="white-seha-logo" alt="صحة أبيض">
+            </div>
+            <p class="blue-desc">منصة صحة تخدم جميع المنشآت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشآت الطبية وتسعى إلى توحيد وأتمتة الإجراءات والخدمات.</p>
+            <h3 class="menu-title">القائمة الرئيسية</h3>
+            <div class="blue-links">
+                <a href="#">الخدمات</a>
+                <a href="#">الاستعلامات</a>
+                <a href="#">الأسئلة الشائعة</a>
+                <a href="#">تواصل معنا</a>
+            </div>
+        </section>
 
         <section class="section-footer">
             <div class="contact-header-container">
