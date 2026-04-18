@@ -134,6 +134,7 @@ max-width: 450px; /* لن يتجاوز هذا العرض ولن يقل عن 90% 
     color:#000000 ; font-size: 18px;
             font-family: inherit;
         }
+        
 
         .btn-blue { 
             background-color: var(--partner-background-blue); color: rgba(240, 255, 240, 1); border: none; 
@@ -152,6 +153,90 @@ max-width: 450px; /* لن يتجاوز هذا العرض ولن يقل عن 90% 
             font-family: inherit;
             font-weight: 600;
         }
+        /* 1. تنسيق الكبسولة العائمة */
+.custom-fab-capsule {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+    background-color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 50px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.custom-fab-capsule:hover { transform: scale(1.05); }
+
+.fab-circle-item {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* الدائرة الزرقاء */
+.chat-circle { background-color: #316eb5; }
+.chat-circle i { color: #ffffff; font-size: 18px; }
+
+/* الدائرة المعدنية (تأثير الكعكة الشعاعي المكثف) */
+.metal-circle {
+    background: conic-gradient(
+        from 0deg at 50% 50%,
+        #0a2b53 0deg, #79c0ff 25deg, #1c4e8e 50deg, #d1eaff 75deg,
+        #1c4e8e 100deg, #79c0ff 130deg, #0a2b53 160deg, #d1eaff 190deg,
+        #1c4e8e 220deg, #79c0ff 250deg, #0a2b53 280deg, #d1eaff 320deg, #1c4e8e 360deg
+    );
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
+    border: 0.5px solid rgba(255, 255, 255, 0.3);
+}
+
+/* 2. تنسيق نافذة الشروط (Modal) */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10001;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: #ffffff;
+    width: 85%;
+    max-width: 450px;
+    padding: 25px;
+    border-radius: 25px;
+    text-align: right;
+    direction: rtl;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal-content h3 { margin-top: 0; color: #333; }
+.modal-content p { color: #666; font-size: 14px; line-height: 1.6; }
+
+.modal-buttons { display: flex; gap: 12px; margin-top: 25px; }
+
+.btn-start {
+    background: #316eb5; color: white; border: none;
+    padding: 12px; border-radius: 50px; flex: 2; cursor: pointer; font-weight: bold;
+}
+
+.btn-cancel {
+    background: #f0f0f0; color: #666; border: none;
+    padding: 12px; border-radius: 50px; flex: 1; cursor: pointer;
+}
+
 
         /* تنسيقات النتائج */
         .result-container { text-align: center; margin-top: 20px; }
@@ -609,8 +694,57 @@ async function fetchData() {
         document.getElementById('res-name').innerText = "حدث خطأ أثناء الاتصال بالقاعدة";
     }
 }
+// فتح نافذة الشروط عند الضغط على الكبسولة
+function showTerms() {
+    document.getElementById('termsModal').style.display = 'flex';
+}
+
+// إغلاق النافذة عند الضغط على إلغاء
+function closeTerms() {
+    document.getElementById('termsModal').style.display = 'none';
+}
+
+// إجراء زر ابدأ المحادثة
+function confirmAction() {
+    // الانتقال إلى الرابط المطلوب في نافذة جديدة
+    window.open('https://elevenlabs.io/conversational-ai', '_blank'); 
+    
+    // إغلاق نافذة الشروط بعد الانتقال
+    closeTerms();
+}
+
+
+// إغلاق النافذة عند الضغط خارجها
+window.onclick = function(event) {
+    let modal = document.getElementById('termsModal');
+    if (event.target == modal) {
+        closeTerms();
+    }
+}
+
 
 </script>
+<div class="custom-fab-capsule" onclick="showTerms()">
+    <div class="fab-circle-item chat-circle">
+        <i class="fa-solid fa-comment-dots"></i>
+    </div>
+    
+    <div class="fab-circle-item metal-circle"></div>
+</div>
+
+<div id="termsModal" class="modal-overlay">
+    <div class="modal-content">
+        <h3>الشروط والأحكام</h3>
+        <p>
+            يتم تسجيل وحفظ محتوى المحادثة وبيانات استخدامها لأغراض تشغيل الخدمة وتحسينها، وذلك وفقاً لشروط الاستخدام وسياسة الخصوصية المعتمدة في منصة صحة. تولّد ردود المساعد الرقمي آلياً، وهي مخصصة لتقديم معلومات عامة فقط، ولا تُعد استشارة طبية.
+        </p>
+        
+        <div class="modal-buttons">
+            <button onclick="closeTerms()" class="btn-cancel">إلغاء</button>
+            <button onclick="confirmAction()" class="btn-start">ابدأ المحادثة <i class="fa-solid fa-comment"></i></button>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
